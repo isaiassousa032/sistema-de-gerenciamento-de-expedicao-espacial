@@ -1,7 +1,6 @@
-from datetime import date
 
 class Missao:
-    def __init__(self, id: int, nome_da_missao: str, data_de_lancamento: date, destino: str, tripulacao: str, duracao, status_da_missao: str, carga_util: str ) -> None:
+    def __init__(self, id: int, nome_da_missao: str, data_de_lancamento, destino: str, tripulacao: str, duracao, status_da_missao: str, carga_util: str ) -> None:
         self.id = id
         self.nome_da_missao = nome_da_missao
         self.data_de_lancamento = data_de_lancamento
