@@ -18,9 +18,11 @@ def cria_missao():
     return jsonify({"message": "Nova missão criada com sucesso."})
 
 @app.route('/missoes', methods=['GET'])
-    
 def recupera_missoes():
-    lista_missoes = [missao.para_dicionario() for missao in missoes] #itera cada missao utilizando a classe missao.para_dicionario que retorna em formato json
+    # Ordena as missões por data de lançamento em ordem decrescente
+    missoes_ordenadas = sorted(missoes, key=lambda m: m.data_lancamento, reverse=True)
+
+    lista_missoes = [missao.para_dicionario() for missao in missoes_ordenadas] #itera cada missao utilizando a classe missao.para_dicionario que retorna em formato json
     output = {
                 "missoes": lista_missoes,
                 "total_missoes": len(lista_missoes)
