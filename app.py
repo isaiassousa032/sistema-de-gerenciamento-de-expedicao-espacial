@@ -11,7 +11,7 @@ controle_de_missao_pelo_id = 1 #Uma variável global que controla o ID da próxi
 def cria_missao():
     global controle_de_missao_pelo_id
     data = request.get_json() #recupera os dados JSON enviados no corpo da requisição POST.
-    nova_missao = Missao(id=controle_de_missao_pelo_id, nome_da_missao=data.get('nome_da_missao'), data_de_lancamento=data.get('data_de_lancamento'), destino=data.get('destino'), tripulacao=data.get('tripulacao'), duracao=data.get('duracao'), status_da_missao=data.get('status_da_missao'), carga_util=data.get('carga_util'))
+    nova_missao = Missao(id=controle_de_missao_pelo_id, nome_missao=data.get('nome_missao'), data_lancamento=data.get('data_lancamento'), destino=data.get('destino'), estado_missao=data.get('estado_missao'), tripulacao=data.get('tripulacao'), carga_util=data.get('carga_util'), duracao_missao=data.get('duracao_missao'), custo_missao=data.get('custo_missao'), status_missao=data.get('status_missao'), )
     controle_de_missao_pelo_id += 1
     missoes.append(nova_missao)
     print(missoes)
@@ -46,13 +46,16 @@ def atualiza_missao(id):
         return jsonify({"message": "Missão não encontrada"}), 404 #404 é uma mensagem do servidor, avisando que o recurso/página não foi encontrado.
     
     data = request.get_json()
-    missao.nome_da_missao = data['nome_da_missao']
-    missao.data_de_lancamento = data['data_de_lancamento']
+    missao.nome_missao = data['nome_missao']
+    missao.data_lancamento = data['data_lancamento']
     missao.destino = data['destino']
+    missao.estado_missao = data['estado_missao']
     missao.tripulacao = data['tripulacao']
-    missao.duracao = data['duracao']
-    missao.status_da_missao = data['status_da_missao']
     missao.carga_util = data['carga_util']
+    missao.duracao_missao = data['duracao_missao']
+    missao.custo_missao = data['custo_missao']
+    missao.status_missao = data['status_missao']
+    
     
     return jsonify({"message":"Missão atualizada com sucesso."}), 200
            
