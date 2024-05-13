@@ -1,11 +1,11 @@
-from flask import Flask, jsonify, request 
-from models.missao import Missao
-
-# Cria uma nova instância da classe Flask, atribuindo-a à variável app
-# o __name__ tem valor __main__
-app = Flask(__name__) 
-
-missoes = [] #lista vazia que armazenará as missões criadas
+from app import db
+from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, render_template ##jsonify, request 
+from flask_restful import Api
+#db = SQLAlchemy()
+from app import app
+from app.models.missoes import Missoes
+'''missoes = [] #lista vazia que armazenará as missões criadas
 controle_de_missao_pelo_id = 1 #Uma variável global que controla o ID da próxima missão a ser criada, iniciando em 1.
 @app.route('/missoes', methods=['POST'])
 def cria_missao():
@@ -35,6 +35,7 @@ def recupera_missao_por_id(id):
         if m.id == id:
             return jsonify(m.para_dicionario())
     return jsonify({"message": "Missão não encontrada"}), 404
+
 
 @app.route('/missoes/<int:id>', methods=['PUT'])
 def atualiza_missao(id):
@@ -73,7 +74,26 @@ def deleta_missao(id):
         return jsonify({"message": "Missão não encontrada"}), 404
     
     missoes.remove(missao)
-    return jsonify({"message": "Missão deletada com sucesso"}), 200
+    return jsonify({"message": "Missão deletada com sucesso"}), 200'''
+
+
+db = SQLAlchemy(app)
+
+
+
+app = Flask(__name__)
+api = Api(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+#db = SQLAlchemy(app)
+from app.models.missoes import Missoes
+with app.app_context():
+    db.create_all()
+
+from app.view.reso_missoes import Cria_missao, Ler_todas_missoes, Atualiza_missao, Deleta_missao
+api.add_resource(Cria_missao, '/criar')
+api.add_resource(Ler_todas_missoes, '/ler')
+api.add_resource(Atualiza_missao, '/atualizar')
+api.add_resource(Deleta_missao, '/deletar')
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', debug=True, port=2961) 
+    app.run(host='127.0.0.1', debug=True, port=2961)
