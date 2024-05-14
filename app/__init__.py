@@ -1,7 +1,6 @@
-from flask import Flask, render_template ##jsonify, request 
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import Api
-#db = SQLAlchemy()
 
 app = Flask(__name__)
 api = Api(app)
