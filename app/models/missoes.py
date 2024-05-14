@@ -15,8 +15,7 @@ class Missoes(db.Model):
     status_missao = db.Column(db.String(100), nullable=False)
 
 
-    def __init__(self, id, nome_missao, data_lancamento, destino, estado_missao, tripulacao, carga_util, duracao_missao, custo_missao, status_missao):
-        self.id = id
+    def __init__(self, nome_missao, data_lancamento, destino, estado_missao, tripulacao, carga_util, duracao_missao, custo_missao, status_missao):
         self.nome_missao = nome_missao
         self.data_lancamento = data_lancamento
         self.destino = destino
@@ -43,7 +42,7 @@ class Missoes(db.Model):
         except Exception as e:
             print(f"Erro ao recuperar todas as missões: {e}")
 
-    def deleta_missao(self, id ):
+    def deleta_missao(self, id):
         try:
             db.session.query(Missoes).filter(Missoes.id==id).delete()
             db.session.commit()

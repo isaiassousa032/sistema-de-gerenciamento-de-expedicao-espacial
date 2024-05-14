@@ -66,12 +66,10 @@ class Atualiza_missao(Resource):
             return jsonify({'status': 500, 'msg': f'{e}'}), 500
 
 class Deleta_missao(Resource):
-    def delete(self, id_missao):
+    def delete(self):
         try:
-            missao = Missoes.query.get(id_missao)
-            if not missao:
-                return jsonify({'message': 'Missão não encontrada'}), 404
-            missao.delete()
-            return jsonify({'message': 'Missão excluída com sucesso!'}), 200
+            datas = argumentos_exclusao.parse_args()
+            Missoes.deleta_missao(self, datas['id'])
+            return ({'message': 'Missão excluída com sucesso!'}), 200
         except Exception as e:
             return jsonify({'status': 500, 'msg': f'{e}'}), 500
