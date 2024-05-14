@@ -1,4 +1,8 @@
-from app import db
+from app import app
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', debug=True, port=2961)
+
+"""from app import db
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template ##jsonify, request 
 from flask_restful import Api
@@ -93,7 +97,4 @@ from app.view.reso_missoes import Cria_missao, Ler_todas_missoes, Atualiza_missa
 api.add_resource(Cria_missao, '/criar')
 api.add_resource(Ler_todas_missoes, '/ler')
 api.add_resource(Atualiza_missao, '/atualizar')
-api.add_resource(Deleta_missao, '/deletar')
-
-if __name__ == "__main__":
-    app.run(host='127.0.0.1', debug=True, port=2961)
+api.add_resource(Deleta_missao, '/deletar')"""

@@ -11,8 +11,8 @@ from app.models.missoes import Missoes
 with app.app_context():
     db.create_all()
 
-from app.view.reso_missoes import Cria_missao, Ler_todas_missoes, Atualiza_missao, Deleta_missao
+from app.view.reso_missoes import Index, Cria_missao, Atualiza_missao, Deleta_missao
+api.add_resource(Index, '/')
 api.add_resource(Cria_missao, '/criar')
-api.add_resource(Ler_todas_missoes, '/ler')
 api.add_resource(Atualiza_missao, '/atualizar')
 api.add_resource(Deleta_missao, '/deletar')
